@@ -39,6 +39,8 @@
 import FormInput from './Input.vue';
 import FormCheckbox from './Checkbox.vue';
 import FormA from './A.vue';
+import FormImageText from './ImageText.vue';
+
 import FormAction from './Action.vue';
 import FormTreeSelect from './TreeSelect.vue';
 
@@ -73,7 +75,7 @@ export default {
     }
   },
   components: {
-    FormInput, FormCheckbox, FormA, FormAction, FormTreeSelect
+    FormInput, FormCheckbox, FormA, FormAction, FormTreeSelect, FormImageText
   }
 }
 
