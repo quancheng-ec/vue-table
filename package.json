@@ -1,6 +1,6 @@
 {
-  "name": "vue2-table",
-  "version": "0.0.5",
+  "name": "pomjs-vue2-table",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,12 @@
   ],
   "author": "joe",
   "license": "ISC",
+  "pomjs": {
+    "components": {
+      "DataPager": "./Pager.vue",
+      "DataTable": "./Table.vue"
+    }
+  },
   "bugs": {
     "url": "https://github.com/quancheng-ec/vue-table/issues"
   },
