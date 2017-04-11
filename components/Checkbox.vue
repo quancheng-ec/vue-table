@@ -1,10 +1,10 @@
 <template>
-  <th class="bs-checkbox " style="width: 36px; ">
+  <div class="bs-checkbox " style="width: 36px; ">
     <div class="th-inner ">
       <input name="btSelectAll" type="checkbox" :checked='item.checkbox' @click="select">
     </div>
     <div class="fht-cell"></div>
-  </th>
+  </div>
 </template>
 
 <script>
