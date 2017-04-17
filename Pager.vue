@@ -5,7 +5,7 @@
       <div class="col-md-4">
         <div class="form-group ">
           <label class="control-label"
-                 style="margin:9px 0px;">共{{page.total}}条记录,当前显示{{ transformShowNum() }}条</label>
+                 style="margin:9px 0px;">{{i18n('leftHint')}}</label>
         </div>
       </div>
       <div class="col-md-8 text-right">
@@ -16,15 +16,14 @@
           <button type="button"
                   class="btn  btn-info btn-outline"
                   @click="changePage('prev')">‹</button>
-          <label class="control-label">共{{totalPage}}页,</label>
-          <label class="control-label">当前第</label>
+          <label class="control-label">{{i18n('total')}}</label>
           <input type="number"
                  class="form-control "
                  min="1"
                  :max="totalPage"
                  style="width: 50px;"
                  v-model="curPage">
-          <label class="control-label">页</label>
+          <label class="control-label">{{i18n('page')}}</label>
           <button type="button"
                   class="btn  btn-info btn-outline"
                   @click="changePage('next')">›</button>
@@ -37,7 +36,7 @@
     </form>
     <div v-if="page.num<=0"
          style="text-align:center;">
-      暂无记录,请添加记录或者导入
+      {{i18n('emoty')}}
     </div>
   </div>
   <!-- 分页 -->
@@ -45,7 +44,7 @@
 
 <script>
 export default {
-  props: ['pageSize', 'url', 'query', 'page'],
+  props: ['pageSize', 'url', 'query', 'page', 'language'],
   data() {
     return {
       curPage: 1,
@@ -86,6 +85,31 @@ export default {
     }
   },
   methods: {
+    i18n(key){
+      if(key == 'leftHint'){
+        if(this.language == 'en'){
+          return "Records " + this.transformShowNum() + ' of ' + this.page.total;
+        }
+        return "共" + this.page.total + "条记录,当前显示" + this.transformShowNum() + "条";
+      }else if(key == 'total'){
+        if(this.language == 'en'){
+          return "Total " + this.totalPage + " page, jump to "
+        }
+        return "共" + this.totalPage + "页,当前第"
+      }else if(key == 'page'){
+        if(this.language == 'en'){
+          return " page ";
+        }else{
+          return "页";
+        }
+      }else if(key == 'empty'){
+        if(this.language == 'en'){
+          return 'Empty';
+        }else{
+          return '暂无信息'
+        }
+      }
+    },
     changePage(status) {
       if (status === 'first') {
         this.curPage = 1;
