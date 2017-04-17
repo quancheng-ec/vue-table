@@ -3,7 +3,7 @@
     <table class="table">
       <thead>
         <tr>
-          <th v-for="item in data[0].items" v-if="!item.hidden" :class="getThClass(item)" :style="getThStyle(item)">
+          <th v-for="item in data[0].items" :width="item.width" v-if="!item.hidden" :class="getThClass(item)" :style="getThStyle(item)">
             <template v-if="item.component==='FormCheckbox'">
               <div class="th-inner ">
                 <input name="btSelectAll" type="checkbox" @click="selectAll">
