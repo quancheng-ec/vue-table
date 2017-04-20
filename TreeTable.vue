@@ -31,7 +31,7 @@
               <!-- 默认显示文本，如果有自定义展示，展示自定义组件 -->
               <template v-if="it.component">
                 <a href="javascript:;"
-                   @click="expand(item)"
+                   @click="toexpand(item)"
                    v-if="i===0&&((item.children&&item.children.length>0) || item.$level)"
                    style="margin-right:5px;"><i :class="item.$style"></i></a>
                 <component :is="it.component"
@@ -42,7 +42,7 @@
               </template>
               <template v-else>
                 <a href="javascript:;"
-                   @click="expand(item)"
+                   @click="toexpand(item)"
                    v-if="i===0&&((item.children&&item.children.length>0) || item.$level)"
                    style="margin-right:5px;"><i :class="item.$style"></i></a> {{item[it.name]}}
               </template>
@@ -112,7 +112,7 @@ export default {
       return result;
 
     },
-    expand(item, close) {
+    toexpand(item, close) {
       if (close) {
         item.$expand = !item.$expand;
       }
@@ -120,7 +120,7 @@ export default {
         console.log(item);
         item.$style = item.$style !== 'fa fa-caret-down' ? "fa fa-caret-down" : "fa fa-caret-right";
         item.children.forEach(it => {
-          this.expand(it, true);
+          this.toexpand(it, true);
         })
       }
 

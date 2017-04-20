@@ -54,7 +54,7 @@ export default {
   ],
   methods: {
     toggleCheckBox() {
-      this.item[this.it.name] = false;
+      this.item[this.it.name] = !this.item[this.it.name];
     }
   }
 }
