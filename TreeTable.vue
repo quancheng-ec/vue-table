@@ -3,7 +3,7 @@
     <table class="table">
       <thead>
         <tr>
-          <th v-for="item in cloums"
+          <th v-for="item in columns"
               :width="item.width"
               v-if="!item.hidden"
               :class="getThClass(item)"
@@ -25,7 +25,7 @@
       <tbody>
         <template v-for="(item,index) in list">
           <tr v-show='item.$expand'>
-            <td v-for="(it,i) in cloums"
+            <td v-for="(it,i) in columns"
                 v-if="!it.hidden"
                 :style="computedLeft(item,i)">
               <!-- 默认显示文本，如果有自定义展示，展示自定义组件 -->
@@ -58,23 +58,29 @@
 import UiTr from './components/Tr.vue'
 import T_A from './libs/A.vue';
 import T_Switcher from './libs/Switcher.vue';
+import T_Input from './libs/Input.vue';
+
 
 export default {
-  props: ['page', 'deleteAPI', 'saveAPI', 'cloums', 'expand'],
+  props: ['page', 'columns', 'expand'],
   data() {
     return {
-      list: [],
-      caches: [],
-
+      list: []
     }
   },
   created() {
     this.init();
   },
   watch: {
-    data: {
+    page: {
       handler: function () {
         this.init();
+      },
+      deep: true
+    },
+    list: {
+      handler: function () {
+        this.$emit('update', this.list);
       },
       deep: true
     }
@@ -155,7 +161,7 @@ export default {
     }
   },
   components: {
-    T_A, T_Switcher
+    T_A, T_Switcher,T_Input
   }
 
 }
