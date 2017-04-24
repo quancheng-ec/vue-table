@@ -60,6 +60,7 @@ import T_A from './libs/A.vue';
 import T_Switcher from './libs/Switcher.vue';
 import T_Input from './libs/Input.vue';
 import T_Select from './libs/Select.vue';
+import T_Tag from './libs/Tag.vue';
 
 
 export default {
@@ -162,7 +163,7 @@ export default {
     }
   },
   components: {
-    T_A, T_Switcher,T_Input,T_Select
+    T_A, T_Switcher, T_Input, T_Select, T_Tag
   }
 
 }
