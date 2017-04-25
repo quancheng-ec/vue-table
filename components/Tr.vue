@@ -24,7 +24,8 @@
                      :deleteAPI='deleteAPI'
                      :saveAPI='saveAPI'
                      :cache='cache'
-                     @refresh="onRefresh(arguments[0])"></component>
+                     @refresh="onRefresh(arguments[0])"
+                     :eventBus='eventBus'></component>
         </template>
         <template v-else>
           {{it.value}}
@@ -47,17 +48,17 @@ import FormTreeSelect from './TreeSelect.vue';
 
 
 export default {
-  props: ['item', 'index', 'page', 'deleteAPI', 'saveAPI'],
+  props: ['item', 'index', 'page', 'deleteAPI', 'saveAPI', 'checked', 'eventBus'],
   data() {
     return {
-      cache: {}
+      cache: {},
     }
   },
   created() {
     this.init();
   },
   watch: {
-    item() {
+    item(){
       this.init();
     }
   },
@@ -69,10 +70,14 @@ export default {
           this.cache[item.name] = item.hidden ? item.value : '';
         }
       });
+      this.$forceUpdate();
     },
+
     onRefresh(data) {
       this.$emit('refresh', data);
     }
+  },
+  mounted(){
   },
   components: {
     FormInput, FormCheckbox, FormA, FormAction, FormTreeSelect, FormImageText

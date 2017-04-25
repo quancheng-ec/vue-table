@@ -10,16 +10,23 @@
 <script>
 export default {
   // 接收上层传递的value
-  props: ['item','index','page'],
+  props: ['item','index','page','eventBus'],
   data() {
     return {
     }
   },
   created() {
   },
+  mounted(){
+    this.eventBus.$on("selectAll", ()=>{
+      this.item.checkbox = true;
+      this.$forceUpdate();
+    })
+  },
   methods: {
     select(e) {
       this.item.checkbox = e.target.checked;
+      this.eventBus.$emit("changeCheck");
     }
   }
 
