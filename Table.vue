@@ -69,10 +69,10 @@ export default {
       this.checkedList = [];
       this.data.map( item => {
         if(item.checkbox){
-          this.checkedList.push(item.id);
+          this.checkedList.push(item);
         }
       })
-      if(this.checkedList.length > 0 && this.checkedList[0] === ''){
+      if(this.checkedList.length > 0 && this.checkedList[0].id === ''){
         this.checkedList.splice(0, 1);
       }
       this.$emit("select", this.checkedList);
