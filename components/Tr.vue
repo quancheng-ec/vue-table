@@ -86,6 +86,16 @@ export default {
 
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
-
+<style lang="stylus" rel="stylesheet/stylus" scoped>
+tr {
+  a {
+    color: #797979;
+  }
+}
+tr:hover {
+  background-color: #F8FAFB;
+  a {
+    color: #5A97F1;
+  }
+}
 </style>
