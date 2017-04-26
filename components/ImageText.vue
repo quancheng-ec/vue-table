@@ -1,7 +1,7 @@
 <template>
   <span>
-        <img :src="it.param.url" :style="style" />{{ it.value }}
-      </span>
+    <img :src="it.param.url" class="image" :style="style" />{{ it.value }}
+  </span>
 </template>
 
 <script>
@@ -28,6 +28,8 @@ export default {
 
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
-
+<style lang="stylus" rel="stylesheet/stylus" scoped>
+  .image{
+    margin-right: 10px;
+  }
 </style>
