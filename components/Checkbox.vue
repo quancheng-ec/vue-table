@@ -19,7 +19,6 @@ export default {
   },
   mounted(){
     this.eventBus.$on("selectAll", ()=>{
-      this.item.checkbox = true;
       this.$forceUpdate();
     })
   },
