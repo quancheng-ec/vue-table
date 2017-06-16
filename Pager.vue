@@ -7,11 +7,17 @@
           <label class="control-label"
                  style="margin:9px 0px;">{{i18n('leftHint')}}</label>
           <label class="control-label"> {{i18n('perPageLeft')}}</label>
-          <input type="number"
-                 class="form-control"
-                 style="width: 60px;"
-                 :value="limit"
-                 @keyup.enter="loadPage($event.target.value)">
+          <select name=""
+                  class="form-control"
+                  :value="limit"
+                  @change="loadPage($event.target.value)">
+            <option :value="pageSize"
+                    v-if="pageSize">{{pageSize}}</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+          </select>
           <label class="control-label"> {{i18n('perPageRight')}}</label>
         </div>
       </div>
