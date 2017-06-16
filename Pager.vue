@@ -1,11 +1,18 @@
 <template>
   <!-- 分页 -->
   <div class="row">
-    <form class="form-inline" v-if="page.num>0 && totalPage>1">
+    <form class="form-inline">
       <div class="col-md-4">
         <div class="form-group ">
           <label class="control-label"
                  style="margin:9px 0px;">{{i18n('leftHint')}}</label>
+          <label class="control-label"> {{i18n('perPageLeft')}}</label>
+          <input type="number"
+                 class="form-control"
+                 style="width: 60px;"
+                 :value="limit"
+                 @keyup.enter="loadPage($event.target.value)">
+          <label class="control-label"> {{i18n('perPageRight')}}</label>
         </div>
       </div>
       <div class="col-md-8 text-right">
@@ -55,7 +62,7 @@ export default {
   },
   created() {
     //如果组件调用方 pageSize没有设置，给个默认值
-    this.limit = this.pageSize ? this.pageSize : 10;
+    this.limit = this.pageSize || 10;
     this.curPage = this.page.curPage;
   },
   computed: {
@@ -85,28 +92,40 @@ export default {
     }
   },
   methods: {
-    i18n(key){
-      if(key == 'leftHint'){
-        if(this.language == 'en'){
+    i18n(key) {
+      if (key == 'leftHint') {
+        if (this.language == 'en') {
           return "Records " + this.transformShowNum() + ' of ' + this.page.total;
         }
         return "共" + this.page.total + "条记录,当前显示" + this.transformShowNum() + "条";
-      }else if(key == 'total'){
-        if(this.language == 'en'){
+      } else if (key == 'total') {
+        if (this.language == 'en') {
           return "Total " + this.totalPage + " page, jump to "
         }
         return "共" + this.totalPage + "页,当前第"
-      }else if(key == 'page'){
-        if(this.language == 'en'){
+      } else if (key == 'page') {
+        if (this.language == 'en') {
           return " page ";
-        }else{
+        } else {
           return "页";
         }
-      }else if(key == 'empty'){
-        if(this.language == 'en'){
+      } else if (key == 'empty') {
+        if (this.language == 'en') {
           return 'Empty';
-        }else{
+        } else {
           return '暂无信息'
+        }
+      } else if (key == 'perPageLeft') {
+        if (this.language == 'en') {
+          return '';
+        } else {
+          return '每页显示'
+        }
+      } else if (key == 'perPageRight') {
+        if (this.language == 'en') {
+          return 'per page';
+        } else {
+          return ''
         }
       }
     },
@@ -135,16 +154,17 @@ export default {
       return start + "~" + end;
     },
     //分页查询
-    loadPage() {
+    loadPage(pageSize) {
       this.$http.post(this.url, {
         curPage: this.page.curPage,
-        pageSize: this.pageSize,
+        pageSize: Number(pageSize) || this.limit,
         total: this.page.total,
         query: this.query || {}
       }).then(res => {
         this.page.items = res.data.data.items;
         this.curPage = this.page.curPage;
         this.page.num = res.data.data.num;
+        this.limit = res.data.data.pageSize;
         // if (res.data.data.total) {
         this.page.total = res.data.data.total;
         if (this.$toast) {
@@ -152,7 +172,7 @@ export default {
         }
         //}
         //this.transformShowNum();
-        this.$emit('pageRefresh',res.data.data);
+        this.$emit('pageRefresh', res.data.data);
       });
     }
   }
