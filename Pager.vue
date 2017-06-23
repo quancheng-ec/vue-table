@@ -174,7 +174,7 @@ export default {
         // if (res.data.data.total) {
         this.page.total = res.data.data.total;
         if (this.$toast) {
-          this.$toast('加载成功!');
+          this.$toast(this.language == 'en' ? 'Loaded Successfully' : '加载成功!');
         }
         //}
         //this.transformShowNum();
