@@ -73,7 +73,7 @@ export default {
   },
   computed: {
     totalPage: function () {
-      let page = (this.page.total + this.limit - 1) / this.limit;
+      let page = Math.ceil(this.page.total / this.limit)
       return parseInt(page);
     }
   },
